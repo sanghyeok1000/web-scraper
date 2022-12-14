@@ -1,11 +1,10 @@
 from requests import get
 from bs4 import BeautifulSoup
 
-def extract_jobs(keyword):
+def extract_wwr_jobs(keyword):
     base_url = "https://weworkremotely.com/remote-jobs/search?term="
-    search_term = "python"
 
-    response = get(f"{base_url}{search_term}")
+    response = get(f"{base_url}{keyword}")
     if response.status_code != 200:
         print("Can't request website")
     else:
@@ -27,5 +26,4 @@ def extract_jobs(keyword):
                     'position': title.string
                 }
                 results.append(job_data)
-                for result in results:
-                    print(result)
+        return results
