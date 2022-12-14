@@ -8,7 +8,7 @@ response = get(f"{base_url}{search_term}")
 if response.status_code != 200:
     print("Can't request website")
 else:
-    result = []
+    results = []
     soup = BeautifulSoup(response.text, "html.parser")
     jobs = soup.find_all("section", class_="jobs")
     for job_section in jobs:
@@ -25,4 +25,6 @@ else:
                 'region': region.string,
                 'position': title.string
             }
-            result.append(job_data)
+            results.append(job_data)
+            for result in results:
+                print(result)
